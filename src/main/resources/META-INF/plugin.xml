@@ -1,0 +1,60 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.mth.CodeSnippet</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>CodeSnippet</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="duwen0706@gmail.com" url="https://www.yourcompany.com">木土禾</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+           <p>可以用来把代码块添加备注按时间生成markdown,如果配置了语雀可以自动上传到语雀的相关知识库</p>
+         <ol>
+           <li> 1. 选中代码块</li>
+           <li> 2. 输入代码块简介</li/>
+           <li> 3. 自动生成markdown并上传到语雀对应知识库</li>
+         </ol>
+  ]]></description>
+
+    <change-notes>
+        <![CDATA[
+      <ol>
+       <li> V1.0 release.</li>
+     </ol>
+    ]]>
+    </change-notes>
+
+<!--    <idea-version since-build="220.0"/>-->
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="CodeSnippetNotificationGroup"
+                           displayType="BALLOON"/>
+        <applicationService
+                serviceImplementation="com.mth.codesnippet.setting.CommonSetting"/>
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.mth.codesnippet.setting.CommonSettingConfigurable"
+                id="com.mth.codesnippet.setting.CommonSettingConfigurable"
+                displayName="CodeSnippet Setting"/>
+    </extensions>
+    <actions>
+        <action id="com.mth.codesnippet.action.SelectCodeSnippetAction"
+                class="com.mth.codesnippet.action.SelectCodeSnippetAction" text="选中代码块"
+                description="选中代码块">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="meta S"/>
+        </action>
+    </actions>
+</idea-plugin>
