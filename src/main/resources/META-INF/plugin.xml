@@ -14,6 +14,12 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
+         <p>It can be used to add comments to the code block, then generate markdown according to the time, and automatically upload it to the relevant knowledge of YuQue</p>
+         <ol>
+           <li>Select code block</li>
+           <li>Introduce code blocks</li/>
+           <li>generate markdown then upload it to YuQue</li>
+         </ol>
            <p>可以用来把代码块添加备注按时间生成markdown,自动上传到语雀的相关知识库</p>
          <ol>
            <li>选中代码块</li>
@@ -53,8 +59,8 @@
         <action id="com.mth.codesnippet.action.SelectCodeSnippetAction"
                 class="com.mth.codesnippet.action.SelectCodeSnippetAction" text="选中代码块"
                 description="选中代码块">
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="meta S"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="meta U"/>
         </action>
     </actions>
 </idea-plugin>
