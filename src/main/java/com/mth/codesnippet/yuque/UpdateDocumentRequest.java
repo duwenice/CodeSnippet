@@ -1,7 +1,7 @@
 package com.mth.codesnippet.yuque;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.gson.annotations.SerializedName;
 
 /**
  * @author 木土禾
@@ -15,7 +15,7 @@ public class UpdateDocumentRequest {
 
     private String body;
 
-    @SerializedName("_force_asl")
+    @JsonProperty("_force_asl")
     private Integer forceAsl;
 
     public String getTitle() {

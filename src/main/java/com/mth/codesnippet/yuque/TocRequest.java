@@ -1,7 +1,7 @@
 package com.mth.codesnippet.yuque;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class TocRequest {
 
     private String action;
 
-    @SerializedName("doc_ids")
+    @JsonProperty("doc_ids")
     private List<Integer> docIds;
 
     public String getAction() {

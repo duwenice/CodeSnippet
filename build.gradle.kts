@@ -43,6 +43,4 @@ tasks {
 }
 
 dependencies {
-    implementation("org.freemarker:freemarker:2.3.31")
-    implementation("com.google.code.gson:gson:2.10")
 }

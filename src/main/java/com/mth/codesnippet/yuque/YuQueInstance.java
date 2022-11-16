@@ -1,6 +1,8 @@
 package com.mth.codesnippet.yuque;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.project.Project;
 import com.mth.codesnippet.constants.YuQueConstants;
 import com.mth.codesnippet.utils.NotifyUtils;
@@ -23,8 +25,14 @@ public class YuQueInstance {
     private final YuQueConfigDTO yuQueConfigDTO;
 
     private final HttpClient httpClient;
+    
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private final Gson gson;
+    {
+        OBJECT_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
 
     private final Project project;
 
@@ -32,7 +40,6 @@ public class YuQueInstance {
         this.yuQueConfigDTO = yuQueConfigDTO;
         this.project = project;
         this.httpClient = HttpClient.newBuilder().build();
-        this.gson = new Gson();
     }
 
     public void upsertDoc(String md) throws IOException, InterruptedException {
@@ -62,11 +69,11 @@ public class YuQueInstance {
                 .header("User-Agent", YuQueConstants.CODE_SNIPPET)
                 .header(YuQueConstants.TOKEN_HEADER, yuQueConfigDTO.getToken())
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(createDocumentRequest)))
+                .POST(HttpRequest.BodyPublishers.ofString(OBJECT_MAPPER.writeValueAsString(createDocumentRequest)))
                 .build();
         HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         notifyIfRequestFailed(response);
-        return gson.fromJson(response.body(), DocumentResponse.class).getData();
+        return OBJECT_MAPPER.readValue(response.body(), DocumentResponse.class).getData();
     }
 
     private void notifyIfRequestFailed(HttpResponse<String> response) {
@@ -90,7 +97,7 @@ public class YuQueInstance {
             return null;
         }
         notifyIfRequestFailed(queryResp);
-        return gson.fromJson(queryResp.body(), DocumentResponse.class).getData();
+        return OBJECT_MAPPER.readValue(queryResp.body(), DocumentResponse.class).getData();
     }
 
     public void updateDoc(UpdateDocumentRequest updateDocumentRequest, Integer docId) throws IOException, InterruptedException {
@@ -100,7 +107,7 @@ public class YuQueInstance {
                 .header("User-Agent", YuQueConstants.CODE_SNIPPET)
                 .header(YuQueConstants.TOKEN_HEADER, yuQueConfigDTO.getToken())
                 .header("Content-Type", "application/json")
-                .PUT(HttpRequest.BodyPublishers.ofString(gson.toJson(updateDocumentRequest)))
+                .PUT(HttpRequest.BodyPublishers.ofString(OBJECT_MAPPER.writeValueAsString(updateDocumentRequest)))
                 .build();
         HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         notifyIfRequestFailed(response);
@@ -113,7 +120,7 @@ public class YuQueInstance {
                 .header("User-Agent", YuQueConstants.CODE_SNIPPET)
                 .header(YuQueConstants.TOKEN_HEADER, yuQueConfigDTO.getToken())
                 .header("Content-Type", "application/json")
-                .PUT(HttpRequest.BodyPublishers.ofString(gson.toJson(tocRequest)))
+                .PUT(HttpRequest.BodyPublishers.ofString(OBJECT_MAPPER.writeValueAsString(tocRequest)))
                 .build();
         HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         notifyIfRequestFailed(response);

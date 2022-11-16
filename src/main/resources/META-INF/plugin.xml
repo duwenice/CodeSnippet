@@ -14,11 +14,11 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-           <p>可以用来把代码块添加备注按时间生成markdown,如果配置了语雀可以自动上传到语雀的相关知识库</p>
+           <p>可以用来把代码块添加备注按时间生成markdown,自动上传到语雀的相关知识库</p>
          <ol>
-           <li> 1. 选中代码块</li>
-           <li> 2. 输入代码块简介</li/>
-           <li> 3. 自动生成markdown并上传到语雀对应知识库</li>
+           <li>选中代码块</li>
+           <li>输入代码块简介</li/>
+           <li>自动生成markdown并上传到语雀对应知识库</li>
          </ol>
   ]]></description>
 
@@ -30,7 +30,7 @@
     ]]>
     </change-notes>
 
-<!--    <idea-version since-build="220.0"/>-->
+    <idea-version since-build="221.0"/>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
