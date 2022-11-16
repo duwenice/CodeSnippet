@@ -53,7 +53,7 @@ public class CodeNoteDialog extends DialogWrapper {
             String md = MarkdownGenerator.generateMd(markdownParagraphDTO);
             YuQueConfigDTO yuQueConfigDTO = new YuQueConfigDTO();
             yuQueConfigDTO.setRepo(CommonSetting.getInstance().getYuQueRepo());
-            yuQueConfigDTO.setToken(CommonSetting.getInstance().getYuQueRepo());
+            yuQueConfigDTO.setToken(CommonSetting.getInstance().getYuQueToken());
             YuQueInstance yuQueInstance = new YuQueInstance(yuQueConfigDTO, project);
             yuQueInstance.upsertDoc(md);
         } catch (Exception e) {
