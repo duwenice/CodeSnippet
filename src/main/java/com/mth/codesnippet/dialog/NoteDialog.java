@@ -43,7 +43,7 @@ public class NoteDialog extends DialogWrapper {
     protected @Nullable JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel(new BorderLayout());
         dialogPanel.add(editorTextField, BorderLayout.CENTER);
-        dialogPanel.setSize(100, 20);
+        editorTextField.setPreferredSize(new Dimension(150, 50));
         return dialogPanel;
     }
 
