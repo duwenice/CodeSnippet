@@ -55,7 +55,7 @@ public class YuQueInstance {
             String updateContent = documentResponse.getBody() + "\n\n" + md;
             updateDoc(new UpdateDocumentRequest()
                     .setSlug(slug)
-                    .setTitle(slug)
+                    .setTitle(documentResponse.getTitle())
                     .setBody(updateContent)
                     .setForceAsl(YuQueConstants.FORCE_ASL), documentResponse.getId());
         }
